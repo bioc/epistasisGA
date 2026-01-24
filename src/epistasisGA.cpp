@@ -967,7 +967,7 @@ List chrom_fitness_score(IntegerMatrix case_genetic_data_in, IntegerMatrix compl
     double total_high_risk = n_case_high_risk + n_comp_high_risk;
     if ( (total_high_risk == 0) | (n_case_high_risk == 0) |
          R_isnancpp(n_case_high_risk) | R_isnancpp(n_comp_high_risk) |
-         !arma::is_finite(n_case_high_risk) | !arma::is_finite(n_comp_high_risk)){
+         !std::isfinite(n_case_high_risk) | !std::isfinite(n_comp_high_risk)){
 
          q = pow(10, -10);
 
@@ -1042,7 +1042,7 @@ List chrom_fitness_score(IntegerMatrix case_genetic_data_in, IntegerMatrix compl
     double fitness_score = (1/(1000*invsum_family_weights)) * as_scalar(mu_hat * arma::pinv(cov_mat) * mu_hat.t());
 
     // if the fitness score is zero or undefined (either due to zero variance or mean), reset to small number
-    if ( (fitness_score <= 0) | R_isnancpp(fitness_score) | !arma::is_finite(fitness_score) ){
+    if ( (fitness_score <= 0) | R_isnancpp(fitness_score) | !std::isfinite(fitness_score) ){
       fitness_score = pow(10, -10);
     }
 
@@ -1396,7 +1396,7 @@ List GxE_fitness_score_mvlm(NumericMatrix case_genetic_data_,
             arma::vec H_Einv_diag = H_Einv.diag();
             
             // if the fitness score is zero or undefined reset to small number
-            if ( (s <= 0) | (R_isnancpp(s)) | (!arma::is_finite(s)) | any(H_Einv_diag <= 0)){
+            if ( (s <= 0) | (R_isnancpp(s)) | (!std::isfinite(s)) | any(H_Einv_diag <= 0)){
                 s = pow(10, -10);
             }
             

@@ -578,6 +578,9 @@ preprocess.genetic.data <- function(case.genetic.data,
 
         }
 
+    } else {
+        # otherwise use manual sampling probs
+        chisq.stats <- snp.sampling.probs
     }
 
     # take cumulative sum of ld.block.vec for output
